@@ -10,6 +10,5 @@ class Scraper
     raw_categories.shift
     raw_categories.each{|cat|categories << cat.strip}
     categories
-    binding.pry
   end
 end

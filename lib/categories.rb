@@ -5,6 +5,7 @@ class Category
     @name = name
     @food = []
     @@all << self
+    binding.pry
   end
 
   def add_food(food_item)
