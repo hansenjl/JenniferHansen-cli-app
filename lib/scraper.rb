@@ -14,12 +14,16 @@ class Scraper
   end
 
   def self.scrape_food_items(food_url)
-    food_items = []
+    recipes = []
     food_page = Nokogiri::HTML(open(food_url))
     foods = food_page.css("div.module")
-    foods.each {|f|
-      food_items << f.css("h4.title").text}
-      food_items
+    foods.each do |f|
+      recipes << {
+        :name => f.css("h4.title").text
+
+      }
+    end
+    food_items
   end
 
 end
