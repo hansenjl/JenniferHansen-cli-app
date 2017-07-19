@@ -1,5 +1,5 @@
 class Recipe
-  attr_accessor :title :author :ingredients :steps :time :serving
+  attr_accessor :title, :author, :ingredients, :steps, :time, :serving
 
   def initialize(recipe_hash)
     recipe_hash.each do |attribute,value|
