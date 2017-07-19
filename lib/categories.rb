@@ -1,6 +1,7 @@
 class Category
   attr_accessor :name, :food
     @@all = []
+
   def initialize(name)
     @name = name
     @food = []

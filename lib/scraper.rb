@@ -2,7 +2,8 @@ require 'open-uri'
 require 'nokogiri'
 
 class Scraper
-  def self.list_categories(categories_url)
+
+  def self.scrape_categories(categories_url)
     categories = []
     index_page = Nokogiri::HTML(open(categories_url))
     raw_categories = index_page.css("ul.nav-topics-list").text.split("\n")
@@ -11,4 +12,14 @@ class Scraper
     raw_categories.each{|cat|categories << cat.strip}
     categories
   end
+
+  def self.scrape_food_items(food_url)
+    food_items = []
+    food_page = Nokogiri::HTML(open(food_url))
+    foods = food_page.css("div.module")
+    foods.each {|f|
+      food_items << f.css("h4.title").text}
+      food_items
+  end
+
 end

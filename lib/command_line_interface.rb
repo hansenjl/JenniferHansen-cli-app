@@ -18,6 +18,7 @@ class CLI
     end
     puts "Switching to the #{Category.all[choice.to_i-1].name} category."
     current_category = Category.all[choice.to_i-1]
+    create_food(current_category.name)
   end
 
   def num_of_categories
@@ -25,7 +26,7 @@ class CLI
   end
 
   def create_categories
-    categories = Scraper.list_categories("http://www.seriouseats.com/recipes")
+    categories = Scraper.scrape_categories("http://www.seriouseats.com/recipes")
     categories.each{|c|
       Category.new(c.to_s)}
   end
@@ -33,6 +34,10 @@ class CLI
   def list_categories
     Category.all.each_with_index{|c,idx|
       puts "#{idx+1}. #{c.name}" }
+  end
+
+  def create_food(category)
+    foods = Scraper.scrape_food_items("http://www.seriouseats.com/tags/recipes/" +"#{category}")
   end
 
 
