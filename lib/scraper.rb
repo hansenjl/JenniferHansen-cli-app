@@ -20,6 +20,8 @@ class Scraper
     foods.each do |f|
       recipes << {
         :name => f.css("h4.title").text
+        :author => f.css("p.author").text
+        :recipe_link =>
 
       }
     end
