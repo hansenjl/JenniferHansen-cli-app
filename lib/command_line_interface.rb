@@ -2,6 +2,11 @@ require_relative '../config/environment.rb'
 class CLI
 
   def call
+    create_categories
+    home_screen
+  end
+
+  def home_screen
     puts "Welcome to the Serious Eats Recipe Finder!"
     puts "What type of recipe are you looking for today?"
     list_categories
@@ -12,8 +17,7 @@ class CLI
       choice = gets.strip
     end
     puts "Switching to the #{Category.all[choice.to_i-1].name} category."
-
-
+    current_category = Category.all[choice.to_i-1]
   end
 
   def num_of_categories
@@ -27,8 +31,8 @@ class CLI
   end
 
   def list_categories
-    create_categories.each_with_index{|c,idx|
-      puts "#{idx+1}. #{c}" }
+    Category.all.each_with_index{|c,idx|
+      puts "#{idx+1}. #{c.name}" }
   end
 
 
