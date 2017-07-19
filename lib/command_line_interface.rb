@@ -5,7 +5,19 @@ class CLI
     puts "Welcome to the Serious Eats Recipe Finder!"
     puts "What type of recipe are you looking for today?"
     list_categories
+    puts "Please enter a number choice."
+    choice = gets.strip
+    until choice.to_i > 0 && choice.to_i <= num_of_categories
+      puts "Please enter a number choice from 1 to #{num_of_categories}."
+      choice = gets.strip
+    end
+    puts "Switching to the #{Category.all[choice.to_i-1].name} category."
 
+
+  end
+
+  def num_of_categories
+    Category.all.count
   end
 
   def create_categories

@@ -14,4 +14,7 @@ class Category
     @food << food
   end
 
+  def self.all
+    @@all
+  end
 end
