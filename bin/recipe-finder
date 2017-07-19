@@ -6,3 +6,5 @@ def create_categories
   categories.each{|c|
     Category.new(c.to_s)}
 end
+
+create_categories
