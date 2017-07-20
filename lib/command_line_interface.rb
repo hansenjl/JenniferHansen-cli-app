@@ -1,5 +1,6 @@
 require_relative '../config/environment.rb'
 class CLI
+  attr_accessor :choice
 
   def call
     create_categories
@@ -10,16 +11,21 @@ class CLI
     puts "Welcome to the Serious Eats Recipe Finder!"
     puts "What type of recipe are you looking for today?"
     list_categories
-    puts "Please enter a number choice."
-    choice = gets.strip
-    until choice.to_i > 0 && choice.to_i <= num_of_categories
-      puts "Please enter a number choice from 1 to #{num_of_categories}."
-      choice = gets.strip
-    end
-    puts "Switching to the #{Category.all[choice.to_i-1].name} category."
-    current_category = Category.all[choice.to_i-1]
+    choose_category
+    puts "Switching to the #{Category.all[@choice.to_i-1].name} category."
+    current_category = Category.all[@choice.to_i-1]
     foods = create_food(current_category)
     binding.pry
+  end
+
+  def choose_category
+    puts "Please enter a number choice."
+    @choice = gets.strip
+    until @choice.to_i > 0 && @choice.to_i <= num_of_categories
+      puts "Please enter a number choice from 1 to #{num_of_categories}."
+      @choice = gets.strip
+    end
+    @choice
   end
 
   def num_of_categories

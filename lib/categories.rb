@@ -13,7 +13,6 @@ class Category
   def add_food(food_hash)
     food = Food.new(food_hash)
     food.category = self
-    binding.pry
     @food << food
   end
 
