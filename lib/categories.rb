@@ -10,9 +10,10 @@ class Category
     @@all << self
   end
 
-  def add_food(food_item)
-    food = Food.new(food_item) if Food.all.include?(food_item) != true
-    food.category = self.name
+  def add_food(food_hash)
+    food = Food.new(food_hash)
+    food.category = self
+    binding.pry
     @food << food
   end
 

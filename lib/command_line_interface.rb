@@ -39,9 +39,10 @@ class CLI
 
   def create_food(category)
     recipes = Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category.link}")
-    binding.pry
     recipes.each{|r|
-      Food.new(r)}
+      category.add_food(r)}
+    #recipes.each{|r|
+     # Food.new(r)}
 
   end
 
