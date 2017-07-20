@@ -6,11 +6,10 @@ class Scraper
   def self.scrape_categories(categories_url)
     categories = []
     index_page = Nokogiri::HTML(open(categories_url))
-    raw_categories = index_page.css("ul.nav-topics-list").text.split("\n")
-    raw_categories.pop
-    raw_categories.shift
-    raw_categories.each{|cat|categories << cat.strip}
+    raw_categories = index_page.css("li.nav-topics-item")
+    raw_categories.each{|cat|categories << {:name => cat.css("a")[0]["data-click-id"], :link => cat.css("a")[0]["href"]}}
     categories
+    binding.pry
   end
 
   def self.scrape_food_items(food_url)

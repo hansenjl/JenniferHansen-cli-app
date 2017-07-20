@@ -28,7 +28,7 @@ class CLI
   def create_categories
     categories = Scraper.scrape_categories("http://www.seriouseats.com/recipes")
     categories.each{|c|
-      Category.new(c.to_s)}
+      Category.new(c)}
   end
 
   def list_categories
