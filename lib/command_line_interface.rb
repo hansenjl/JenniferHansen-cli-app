@@ -14,9 +14,9 @@ class CLI
     choose_category
     puts "Switching to the #{Category.all[@choice.to_i-1].name} category."
     current_category = Category.all[@choice.to_i-1]
-    foods = create_food(current_category)
+    create_food(current_category)
     category_prompts(current_category)
-    foods.each{|food| create_recipes(food)}
+    current_category.foods.each{|food| create_recipes(food)}
   end
 
 
@@ -83,9 +83,8 @@ class CLI
   end
 
   def create_recipes(food)
-    recipe_info = Scraper.scrape_recipes(food[:recipe_link])
-    recipe_info.each{|r|
-      food.add_recipe(r)}
+    recipe_info = Scraper.scrape_recipes(food.recipe_link)
+    food.add_recipe(recipe_info)
   end
 
   def list_all_recipes(category)

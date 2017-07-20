@@ -1,19 +1,19 @@
 class Category
-  attr_accessor :name, :food, :link
+  attr_accessor :name, :foods, :link
     @@all = []
 
   def initialize(category_hash)
     category_hash.each do |att, value|
       self.send("#{att}=",value)
     end
-    @food = []
+    @foods = []
     @@all << self
   end
 
   def add_food(food_hash)
     food = Food.new(food_hash)
     food.category = self
-    @food << food
+    @foods << food
   end
 
   def self.all

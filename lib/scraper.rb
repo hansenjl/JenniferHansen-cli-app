@@ -33,8 +33,6 @@ class Scraper
     step_section = main_info.css("li.recipe-procedure")
     steps = step_section.collect{|s|s.css("div.recipe-procedure-text").text.strip}
     about_section = main_info.css("ul.recipe-about li")
-
-    binding.pry
      recipe_info = {
       :ingredients => ingredient_array,
       :steps=> steps,

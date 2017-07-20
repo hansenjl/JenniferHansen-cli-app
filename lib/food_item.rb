@@ -10,6 +10,7 @@ class Food
   def add_recipe(recipe_info)
     recipe = Recipe.new(recipe_info)
     recipe.food = self
+
   end
 
 end
