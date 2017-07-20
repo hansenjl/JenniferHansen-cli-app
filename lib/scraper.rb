@@ -36,12 +36,16 @@ class Scraper
     steps = []
     step_section = main_info.css("li.recipe-procedure")
     step_section.each{|s|steps << s.css("div.recipe-procedure-text").text.strip}
+
+    about_section = main_info.css("ul.recipe-about li")
+
     binding.pry
      recipe_info = {
-      :ingredients => ingredient_array ,
+      :ingredients => ingredient_array,
       :steps=> steps,
-      :time=>2,
-      :serving=> 2}
+      :time=> about_section[2].css("span.info").text,
+      :serving=> about_section[0].css("span.info").text,
+       }
   end
 
 end
