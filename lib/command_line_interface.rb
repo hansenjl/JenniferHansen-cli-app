@@ -16,6 +16,7 @@ class CLI
     current_category = Category.all[@choice.to_i-1]
     foods = create_food(current_category)
     category_prompts(current_category)
+    foods.each{|food| create_recipes(food)}
   end
 
 
@@ -79,8 +80,12 @@ class CLI
     recipes = Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category.link}")
     recipes.each{|r|
       category.add_food(r)}
-    #recipes.each{|r|
-     # Food.new(r)}
+  end
+
+  def create_recipes(food)
+    recipe_info = Scraper.scrape_recipes(food[:recipe_link])
+    recipe_info.each{|r|
+      food.add_recipe(r)}
   end
 
   def list_all_recipes(category)

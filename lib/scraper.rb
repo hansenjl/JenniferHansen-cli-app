@@ -25,6 +25,19 @@ class Scraper
   end
 
   def self.scrape_recipes(recipe_url)
+    recipe_page = Nokogiri::HTML(open(recipe_url))
+    main_info = recipe_page.css("section.entry-container")
+    ingredient_section = main_info.css("div.recipe-ingredients li.ingredient")
+    ingredient_array  = []
+    ingredient_section.each {|item|
+      ingredient_array << item.text
+    }
+    binding.pry
+     recipe_info = {
+      :ingredients => ingredient_array ,
+      :steps=>2,
+      :time=>2,
+      :serving=> 2}
   end
 
 end
