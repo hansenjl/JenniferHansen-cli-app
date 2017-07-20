@@ -24,4 +24,7 @@ class Scraper
     recipes
   end
 
+  def self.scrape_recipes(recipe_url)
+  end
+
 end
