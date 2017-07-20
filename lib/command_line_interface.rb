@@ -18,7 +18,8 @@ class CLI
     end
     puts "Switching to the #{Category.all[choice.to_i-1].name} category."
     current_category = Category.all[choice.to_i-1]
-    create_food(current_category.link)
+    foods = create_food(current_category.link)
+    binding.pry
   end
 
   def num_of_categories
@@ -37,7 +38,10 @@ class CLI
   end
 
   def create_food(category_link)
-    foods = Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category_link}")
+    recipes = Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category_link}")
+    recipes.each{|r|
+      Food.new(r)}
+
   end
 
 
