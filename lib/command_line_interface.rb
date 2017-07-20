@@ -4,18 +4,17 @@ class CLI
 
   def call
     create_categories
+    puts "Welcome to the Serious Eats Recipe Finder!"
     home_screen
   end
 
   def home_screen
-    puts "Welcome to the Serious Eats Recipe Finder!"
     puts "What type of recipe are you looking for today?"
     list_categories
     choose_category
     puts "Switching to the #{Category.all[@choice.to_i-1].name} category."
     current_category = Category.all[@choice.to_i-1]
     foods = create_food(current_category)
-    binding.pry
     category_prompts(current_category)
   end
 
@@ -32,6 +31,22 @@ class CLI
     until recipe_choice.to_i > 0 && recipe_choice.to_i < 6
       puts "Please enter a number choice from 1 to 5."
       recipe_choice = gets.strip
+    end
+    navigate_to_recipe(recipe_choice,current_category)
+  end
+
+  def navigate_to_recipe(recipe_choice,category)
+    case recipe_choice
+    when 1
+      list_all_recipes(category)
+    when 2
+      random_recipe(category)
+    when 3
+      sort_by_time(category)
+    when 4
+      sort_by_ingredients(category)
+    when 5
+      home_screen
     end
   end
 
@@ -66,8 +81,17 @@ class CLI
       category.add_food(r)}
     #recipes.each{|r|
      # Food.new(r)}
-
   end
 
+  def list_all_recipes(category)
+  end
 
+  def random_recipe(category)
+  end
+
+  def sort_by_time(category)
+  end
+
+  def sort_by_ingredients(category)
+  end
 end
