@@ -16,10 +16,13 @@ class Scraper
     food_page = Nokogiri::HTML(open(food_url))
     foods = food_page.css("div.module__wrapper")
     foods.each do |f|
+      if f.css("a")[0]["href"].include?("recipes")
       recipes << {
         :name => f.css("h4.title").text,
         :recipe_link => f.css("a")[0]["href"]
       }
+      else
+      end
     end
     recipes
   end
@@ -36,9 +39,11 @@ class Scraper
      recipe_info = {
       :ingredients => ingredient_array,
       :steps=> steps,
-      :time=> about_section[2].css("span.info").text,
       :serving=> about_section[0].css("span.info").text,
        }
+       recipe_info[:time] = about_section[2].css("span.info").text if about_section[2] != nil
+      recipe_info[:time] = about_section[1].css("span.info").text if about_section[2] ==nil
+      recipe_info
   end
 
 end

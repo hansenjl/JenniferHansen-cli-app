@@ -6,7 +6,6 @@ class Recipe
       self.send("#{attribute}=",value)
     end
     @@all << self
-    binding.pry
   end
 
   def self.all

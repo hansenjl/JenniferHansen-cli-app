@@ -12,11 +12,11 @@ class CLI
     puts "What type of recipe are you looking for today?"
     list_categories
     choose_category
-    puts "Switching to the #{Category.all[@choice.to_i-1].name} category."
     current_category = Category.all[@choice.to_i-1]
+    puts "Switching to the #{current_category.name} category."
     create_food(current_category)
-    category_prompts(current_category)
     current_category.foods.each{|food| create_recipes(food)}
+    #category_prompts(current_category)
   end
 
 
@@ -91,6 +91,7 @@ class CLI
   end
 
   def random_recipe(category)
+
   end
 
   def sort_by_time(category)
