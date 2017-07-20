@@ -28,15 +28,10 @@ class Scraper
     recipe_page = Nokogiri::HTML(open(recipe_url))
     main_info = recipe_page.css("section.entry-container")
     ingredient_section = main_info.css("div.recipe-ingredients li.ingredient")
-    ingredient_array  = []
-    ingredient_section.each {|item|
-      ingredient_array << item.text
-    }
+    ingredient_array = ingredient_section.collect {|item| item.text}
     ingredient_array.delete_if{|a|a.include?(":")}
-    steps = []
     step_section = main_info.css("li.recipe-procedure")
-    step_section.each{|s|steps << s.css("div.recipe-procedure-text").text.strip}
-
+    steps = step_section.collect{|s|s.css("div.recipe-procedure-text").text.strip}
     about_section = main_info.css("ul.recipe-about li")
 
     binding.pry
