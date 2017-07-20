@@ -32,6 +32,7 @@ class Scraper
     ingredient_section.each {|item|
       ingredient_array << item.text
     }
+    ingredient_array.delete_if{|a|a.include?(":")}
     binding.pry
      recipe_info = {
       :ingredients => ingredient_array ,
