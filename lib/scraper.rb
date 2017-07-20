@@ -33,10 +33,13 @@ class Scraper
       ingredient_array << item.text
     }
     ingredient_array.delete_if{|a|a.include?(":")}
+    steps = []
+    step_section = main_info.css("li.recipe-procedure")
+    step_section.each{|s|steps << s.css("div.recipe-procedure-text").text.strip}
     binding.pry
      recipe_info = {
       :ingredients => ingredient_array ,
-      :steps=>2,
+      :steps=> steps,
       :time=>2,
       :serving=> 2}
   end
