@@ -5,7 +5,6 @@ class Food
     recipe_hash.each do |attribute,value|
       self.send("#{attribute}=",value)
     end
-
   end
 
 end
