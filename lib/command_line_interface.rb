@@ -16,6 +16,23 @@ class CLI
     current_category = Category.all[@choice.to_i-1]
     foods = create_food(current_category)
     binding.pry
+    category_prompts(current_category)
+  end
+
+
+  def category_prompts(current_category)
+    puts "What would you like to do?"
+    puts "1. List all recipes"
+    puts "2. Surprise me with a recipe"
+    puts "3. Sort recipes by total cook time"
+    puts "4. Sort recipes by number of ingredients"
+    puts "5. Go back"
+    puts "Enter the number choice that represents what you want to do."
+    recipe_choice = gets.strip
+    until recipe_choice.to_i > 0 && recipe_choice.to_i < 6
+      puts "Please enter a number choice from 1 to 5."
+      recipe_choice = gets.strip
+    end
   end
 
   def choose_category
