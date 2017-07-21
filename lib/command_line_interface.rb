@@ -27,7 +27,8 @@ class CLI
     puts "2. Surprise me with a recipe".colorize(:blue)
     puts "3. Sort recipes by total cook time".colorize(:blue)
     puts "4. Sort recipes by number of ingredients".colorize(:blue)
-    puts "5. Go back".colorize(:blue)
+    puts "5. Search by ingredient".colorize(:blue)
+    puts "6. Go back".colorize(:blue)
     puts "Enter the number choice that represents what you want to do."
     recipe_choice = gets.strip
     until recipe_choice.to_i > 0 && recipe_choice.to_i < 6
@@ -48,6 +49,8 @@ class CLI
     when "4"
       sort_by_ingredients(category)
     when "5"
+      search_by_ingredient(category)
+    when "6"
       home_screen
     end
   end
@@ -140,16 +143,16 @@ class CLI
   end
 
   def display_recipe(food)
-    puts food.name.upcase.colorize(:blue)
-    puts "TIME TO MAKE:" + "#{food.recipe.time}".colorize(:blue)
-    puts "YIELD:" + "#{food.recipe.serving}".colorize(:blue)
+    puts food.name.upcase.colorize(:magenta)
+    puts "TIME TO MAKE:" + "#{food.recipe.time}".colorize(:magenta)
+    puts "YIELD:" + "#{food.recipe.serving}".colorize(:magenta)
     puts "INGREDIENTS:"
     food.recipe.ingredients.each_with_index{|i,idx|
-      puts "#{idx+1}. "+"#{i}".colorize(:blue)}
+      puts "#{idx+1}. "+"#{i}".colorize(:magenta)}
     puts "STEPS:"
-    puts food.recipe.steps[0].colorize(:blue) if food.recipe.steps.count == 1
+    puts food.recipe.steps[0].colorize(:magenta) if food.recipe.steps.count == 1
     food.recipe.steps.each_with_index{|s,idx|
-      puts "#{idx+1}."+" #{s}".colorize(:blue)}
+      puts "#{idx+1}."+" #{s}".colorize(:magenta)}
   end
 
   def display_after_recipe
