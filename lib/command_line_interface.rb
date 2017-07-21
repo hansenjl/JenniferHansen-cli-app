@@ -97,6 +97,7 @@ class CLI
     puts "Is this what you're looking for?"
     answer = yes_or_no
     if answer == "Y"
+      display_recipe(category.foods[random_choice])
     else
       puts "If you would like a new random recipe, enter 1."
       puts "If you would like to go back one level, enter 2."
@@ -138,5 +139,14 @@ class CLI
   end
 
   def display_recipe(food)
+    puts food.name
+    puts "TIME TO MAKE: #{food.recipe.time}"
+    puts "YIELD: #{food.recipe.serving}"
+    puts "INGREDIENTS:"
+    food.recipe.ingredients.each_with_index{|i,idx|
+      puts "#{idx+1}. #{i}"}
+    puts "STEPS:"
+    food.recipe.steps.each_with_index{|s,idx|
+      puts "#{idx+1}. #{s}"}
   end
 end
