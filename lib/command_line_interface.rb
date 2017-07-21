@@ -5,7 +5,7 @@ class CLI
 
   def call
     create_categories
-    puts "Welcome to the Serious Eats Recipe Finder!"
+    puts "Welcome to the Serious Eats Recipe Finder!".colorize(:blue)
     home_screen
   end
 
@@ -14,7 +14,7 @@ class CLI
     list_categories
     choose_category
     current_category = Category.all[@choice.to_i-1]
-    puts "Switching to the #{current_category.name} category."
+    puts "Switching to the #{current_category.name} category.".colorize(:blue)
     create_food(current_category)
     current_category.foods.each{|food| create_recipes(food)}
     category_prompts(current_category)
@@ -23,11 +23,11 @@ class CLI
 
   def category_prompts(current_category)
     puts "What would you like to do?"
-    puts "1. List all recipes"
-    puts "2. Surprise me with a recipe"
-    puts "3. Sort recipes by total cook time"
-    puts "4. Sort recipes by number of ingredients"
-    puts "5. Go back"
+    puts "1. List all recipes".colorize(:blue)
+    puts "2. Surprise me with a recipe".colorize(:blue)
+    puts "3. Sort recipes by total cook time".colorize(:blue)
+    puts "4. Sort recipes by number of ingredients".colorize(:blue)
+    puts "5. Go back".colorize(:blue)
     puts "Enter the number choice that represents what you want to do."
     recipe_choice = gets.strip
     until recipe_choice.to_i > 0 && recipe_choice.to_i < 6
@@ -74,7 +74,7 @@ class CLI
 
   def list_categories
     Category.all.each_with_index{|c,idx|
-      puts "#{idx+1}. #{c.name}" }
+      puts "#{idx+1}. #{c.name}".colorize(:blue) }
   end
 
   def create_food(category)
@@ -94,19 +94,19 @@ class CLI
 
   def random_recipe(category)
     random_choice = rand(category.foods.count)
-    puts category.foods[random_choice].name
+    puts category.foods[random_choice].name.colorize(:blue)
     puts "Is this what you're looking for?"
     answer = yes_or_no
     if answer == "Y"
       display_recipe(category.foods[random_choice])
     else
-      puts "If you would like a new random recipe, enter 1."
-      puts "If you would like to go back one level, enter 2."
-      puts "If you would like to return to the start, enter 3."
+      puts "If you would like a new random recipe, enter 1.".colorize(:blue)
+      puts "If you would like to go back one level, enter 2.".colorize(:blue)
+      puts "If you would like to return to the start, enter 3.".colorize(:blue)
       input = gets.strip
       until ["1","2","3"].include?(input)
         puts "Please enter 1, 2, or 3."
-        input = get.strip
+        input = gets.strip
       end
       case input
       when "1"
@@ -140,14 +140,18 @@ class CLI
   end
 
   def display_recipe(food)
-    puts food.name
-    puts "TIME TO MAKE: #{food.recipe.time}"
-    puts "YIELD: #{food.recipe.serving}"
+    puts food.name.upcase.colorize(:blue)
+    puts "TIME TO MAKE:" + "#{food.recipe.time}".colorize(:blue)
+    puts "YIELD:" + "#{food.recipe.serving}".colorize(:blue)
     puts "INGREDIENTS:"
     food.recipe.ingredients.each_with_index{|i,idx|
-      puts "#{idx+1}. #{i}"}
+      puts "#{idx+1}. "+"#{i}".colorize(:blue)}
     puts "STEPS:"
+    puts food.recipe.steps[0].colorize(:blue) if food.recipe.steps.count == 1
     food.recipe.steps.each_with_index{|s,idx|
-      puts "#{idx+1}. #{s}"}
+      puts "#{idx+1}."+" #{s}".colorize(:blue)}
+  end
+
+  def display_after_recipe
   end
 end
