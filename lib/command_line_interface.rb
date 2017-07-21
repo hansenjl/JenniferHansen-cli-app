@@ -101,12 +101,9 @@ class CLI
     sorted_foods.each_with_index{|f,idx|
       puts "#{idx+1}. "+"#{f.name}".colorize(:blue)}
     input = recipe_list_choosing(category, category.foods.count)
-    if input.to_i != 0
-      display_recipe(sorted_foods[input.to_i-1])
-      display_after_recipe
-    else
-      display_after_recipe
-    end
+    display_recipe(sorted_foods[input.to_i-1]) if input.to_i != 0
+    display_after_recipe(category)
+
   end
 
   def list_all_recipes(category)
@@ -114,12 +111,8 @@ class CLI
     category.foods.each_with_index{|food, idx|
       puts "#{idx +1}. " + food.name.colorize(:blue)}
     input = recipe_list_choosing(category, category.foods.count)
-    if input.to_i != 0
-      display_recipe(category.foods[input.to_i-1])
-      display_after_recipe
-    else
-      display_after_recipe
-    end
+    display_recipe(category.foods[input.to_i-1]) if input.to_i != 0
+    display_after_recipe(category)
   end
 
   def recipe_list_choosing(category,num_of_choices)
@@ -144,7 +137,7 @@ class CLI
     answer = yes_or_no
     if answer == "Y"
       display_recipe(category.foods[random_choice])
-      display_after_recipe
+      display_after_recipe(category)
     else
       puts "If you would like a new random recipe, enter 'new'.".colorize(:blue)
       puts "If you would like to go back one level, enter 'back'.".colorize(:blue)
@@ -198,11 +191,8 @@ class CLI
       matching_recipes.each_with_index{|recipe,idx|
         puts "#{idx+1}. "+"#{recipe.food.name}".colorize(:blue)}
       choice = recipe_list_choosing(category,matching_recipes.count)
-      if choice.to_i != 0
-        display_recipe(matching_recipes[choice.to_i-1].food)
-      else
-        display_after_recipe
-      end
+      display_recipe(matching_recipes[choice.to_i-1].food) if choice.to_i != 0
+      display_after_recipe(category)
     end
   end
 
@@ -221,6 +211,27 @@ class CLI
     puts "#{food.recipe_link}".colorize(:magenta)
   end
 
-  def display_after_recipe
+  def display_after_recipe(category)
+    puts "Are you done using the recipe finder today?"
+    answer = yes_or_no
+    if answer == "N"
+      puts "What would you like to do?"
+      puts "If you would like to go back one level, enter 'back'.".colorize(:blue)
+      puts "If you would like to return to the start, enter 'home'.".colorize(:blue)
+      input = gets.strip.downcase
+      until ["b","back","h","home"].include?(input)
+        puts "Please enter BACK or HOME."
+        input = gets.strip.downcase
+      end
+      case input
+      when "back", "b"
+        category_prompts(category)
+      when "home", "h"
+        home_screen
+      end
+      puts
+    else
+      abort("Goodbye!")
+    end
   end
 end
