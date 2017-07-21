@@ -16,7 +16,7 @@ class CLI
     puts "Switching to the #{current_category.name} category."
     create_food(current_category)
     current_category.foods.each{|food| create_recipes(food)}
-    #category_prompts(current_category)
+    category_prompts(current_category)
   end
 
 
@@ -38,15 +38,15 @@ class CLI
 
   def navigate_to_recipe(recipe_choice,category)
     case recipe_choice
-    when 1
+    when "1"
       list_all_recipes(category)
-    when 2
+    when "2"
       random_recipe(category)
-    when 3
+    when "3"
       sort_by_time(category)
-    when 4
+    when "4"
       sort_by_ingredients(category)
-    when 5
+    when "5"
       home_screen
     end
   end
@@ -90,13 +90,53 @@ class CLI
   def list_all_recipes(category)
   end
 
-  def random_recipe(category)
 
+  def random_recipe(category)
+    random_choice = rand(category.foods.count)
+    puts category.foods[random_choice].name
+    puts "Is this what you're looking for?"
+    answer = yes_or_no
+    if answer == "Y"
+    else
+      puts "If you would like a new random recipe, enter 1."
+      puts "If you would like to go back one level, enter 2."
+      puts "If you would like to return to the start, enter 3."
+      input = gets.strip
+      until ["1","2","3"].include?(input)
+        puts "Please enter 1, 2, or 3."
+        input = get.strip
+      end
+      case input
+      when "1"
+        random_recipe(category)
+      when "2"
+        category_prompts(category)
+      when "3"
+        home_screen
+      end
+    end
   end
+
+
+  def yes_or_no
+    answer = gets.strip
+    if ["Y", "YES", "YA", "SI"].include?(answer.upcase)
+      "Y"
+    elsif ["N", "NO"].include?(answer.upcase)
+      "N"
+    else
+      puts "Please enter yes or no."
+      yes_or_no
+    end
+  end
+
 
   def sort_by_time(category)
   end
 
   def sort_by_ingredients(category)
+  end
+
+  def display_recipe(food)
   end
 end
