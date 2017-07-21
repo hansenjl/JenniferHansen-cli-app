@@ -91,22 +91,41 @@ class CLI
     food.add_recipe(recipe_info)
   end
 
+  def sort_by_ingredients(category)
+    ##sorting
+    sorted_foods = category.foods.sort do |a,b|
+      a.recipe.ingredients.count <=> b.recipe.ingredients.count
+    end
+    ##display
+    puts "All #{category.name} recipes listed in order from least number of ingredients to most number of ingredients:"
+    sorted_foods.each_with_index{|f,idx|
+      puts "#{idx+1}. "+"#{f.name}".colorize(:blue)}
+    input = recipe_list_choosing(category)
+    display_recipe(sorted_foods[input.to_i-1])
+    display_after_recipe
+  end
+
   def list_all_recipes(category)
     puts "All of the #{category.name} recipes:"
     category.foods.each_with_index{|food, idx|
       puts "#{idx +1}. " + food.name.colorize(:blue)}
+    input = recipe_list_choosing(category)
+    display_recipe(category.foods[input.to_i-1])
+    display_after_recipe
+  end
+
+  def recipe_list_choosing(category)
     puts "Which recipe would you like to view? Enter the number that corresponds to the recipe or type 'back' to go back."
     input = gets.strip
       if ["back","go back","bac"].include?(input.downcase)
         category_prompts(category)
       else
-        until input.to_i > 0 && input.to_i < category.foods.count
+        until input.to_i > 0 && input.to_i <= category.foods.count
           puts "Please enter the number that matches the recipe you would like to view."
           input = gets.strip
         end
-        display_recipe(category.foods[input.to_i-1])
-        display_after_recipe
       end
+      input
   end
 
 
@@ -155,7 +174,9 @@ class CLI
   def sort_by_time(category)
   end
 
-  def sort_by_ingredients(category)
+
+
+  def search_by_ingredient(category)
   end
 
   def display_recipe(food)
