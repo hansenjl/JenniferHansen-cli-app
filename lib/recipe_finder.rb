@@ -9,3 +9,5 @@ require_relative '../lib/recipe_finder/recipe.rb'
 require_relative '../lib/recipe_finder/scraper.rb'
 require_relative '../lib/recipe_finder/command_line_interface.rb'
 
+module RecipeFinder
+end

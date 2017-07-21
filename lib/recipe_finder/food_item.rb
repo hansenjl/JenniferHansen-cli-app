@@ -1,4 +1,4 @@
-class Food
+class RecipeFinder::Food
   attr_accessor :name, :category, :recipe_link, :recipe
   @@all = []
 

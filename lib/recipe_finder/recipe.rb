@@ -1,4 +1,4 @@
-class Recipe
+class RecipeFinder::Recipe
   attr_accessor :ingredients, :steps, :time, :serving, :food
   @@all = []
   def initialize(recipe_hash)

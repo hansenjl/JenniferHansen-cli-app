@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "recipe-finder/version"
+require "recipe_finder/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "recipe-finder"
+  spec.name          = "recipe_finder"
   spec.version       = RecipeFinder::VERSION
   spec.authors       = ["hansenjl"]
   spec.email         = ["jenn.leigh.hansen@gmail.com"]

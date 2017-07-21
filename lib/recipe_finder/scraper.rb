@@ -1,4 +1,4 @@
-class Scraper
+class RecipeFinder::Scraper
 
   def self.scrape_categories(categories_url)
     categories = []

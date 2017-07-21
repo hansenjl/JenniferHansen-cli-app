@@ -1,6 +1,6 @@
-require_relative '../config/environment.rb'
-require 'colorize'
-class CLI
+#require_relative '../config/environment.rb'
+#require 'colorize'
+class RecipeFinder::CLI
   attr_accessor :choice
 
   def call
@@ -13,7 +13,7 @@ class CLI
     puts "What type of recipe are you looking for today?"
     list_categories
     choose_category
-    current_category = Category.all[@choice.to_i-1]
+    current_category = RecipeFinder::Category.all[@choice.to_i-1]
     puts "Switching to the #{current_category.name} category.".colorize(:blue)
     create_food(current_category)
     current_category.foods.each{|food| create_recipes(food)}
@@ -67,24 +67,24 @@ class CLI
   end
 
   def create_categories
-    categories = Scraper.scrape_categories("http://www.seriouseats.com/recipes")
+    categories = RecipeFinder::Scraper.scrape_categories("http://www.seriouseats.com/recipes")
     categories.each{|c|
-      Category.new(c)}
+      RecipeFinder::Category.new(c)}
   end
 
   def list_categories
-    Category.all.each_with_index{|c,idx|
+    RecipeFinder::Category.all.each_with_index{|c,idx|
       puts "#{idx+1}. #{c.name}".colorize(:blue) }
   end
 
   def create_food(category)
-    recipes = Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category.link}")
+    recipes = RecipeFinder::Scraper.scrape_food_items("http://www.seriouseats.com" +"#{category.link}")
     recipes.each{|r|
       category.add_food(r)}
   end
 
   def create_recipes(food)
-    recipe_info = Scraper.scrape_recipes(food.recipe_link)
+    recipe_info = RecipeFinder::Scraper.scrape_recipes(food.recipe_link)
     food.add_recipe(recipe_info)
   end
 

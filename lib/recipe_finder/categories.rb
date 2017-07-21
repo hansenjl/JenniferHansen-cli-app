@@ -1,4 +1,4 @@
-class Category
+class RecipeFinder::Category
   attr_accessor :name, :foods, :link
     @@all = []
 
