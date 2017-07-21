@@ -26,10 +26,9 @@ class RecipeFinder::CLI
     puts ""
     puts "1. List all recipes".colorize(:blue)
     puts "2. Surprise me with a recipe".colorize(:blue)
-    puts "3. Sort recipes by total cook time".colorize(:blue)
+    puts "3. Search by ingredient".colorize(:blue)
     puts "4. Sort recipes by number of ingredients".colorize(:blue)
-    puts "5. Search by ingredient".colorize(:blue)
-    puts "6. Go back".colorize(:blue)
+    puts "5. Go back".colorize(:blue)
     puts "Enter the number choice that represents what you want to do."
     recipe_choice = gets.strip
     until recipe_choice.to_i > 0 && recipe_choice.to_i < 6
@@ -46,12 +45,10 @@ class RecipeFinder::CLI
     when "2"
       random_recipe(category)
     when "3"
-      sort_by_time(category)
+      search_by_ingredient(category)
     when "4"
       sort_by_ingredients(category)
     when "5"
-      search_by_ingredient(category)
-    when "6"
       home_screen
     end
   end
@@ -167,11 +164,6 @@ class RecipeFinder::CLI
       yes_or_no
     end
   end
-
-
-  def sort_by_time(category)
-  end
-
 
 
   def search_by_ingredient(category)
