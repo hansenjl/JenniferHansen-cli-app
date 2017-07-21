@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
-
-gem 'pry'
-gem 'nokogiri'
-gem 'rspec'
-gem 'colorize'
+gemspec
+# gem 'pry'
+# gem 'nokogiri'
+# gem 'rspec'
+# gem 'colorize'
