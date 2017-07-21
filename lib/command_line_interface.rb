@@ -198,7 +198,6 @@ class CLI
       matching_recipes.each_with_index{|recipe,idx|
         puts "#{idx+1}. "+"#{recipe.food.name}".colorize(:blue)}
       choice = recipe_list_choosing(category,matching_recipes.count)
-      binding.pry
       if choice.to_i != 0
         display_recipe(matching_recipes[choice.to_i-1].food)
       else
@@ -218,6 +217,8 @@ class CLI
     puts food.recipe.steps[0].colorize(:magenta) if food.recipe.steps.count == 1
     food.recipe.steps.each_with_index{|s,idx|
       puts "#{idx+1}."+" #{s}".colorize(:magenta)}
+    puts "LINK:"
+    puts "#{food.recipe_link}".colorize(:magenta)
   end
 
   def display_after_recipe
