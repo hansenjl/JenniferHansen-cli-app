@@ -101,8 +101,12 @@ class CLI
     sorted_foods.each_with_index{|f,idx|
       puts "#{idx+1}. "+"#{f.name}".colorize(:blue)}
     input = recipe_list_choosing(category, category.foods.count)
-    display_recipe(sorted_foods[input.to_i-1])
-    display_after_recipe
+    if input.to_i != 0
+      display_recipe(sorted_foods[input.to_i-1])
+      display_after_recipe
+    else
+      display_after_recipe
+    end
   end
 
   def list_all_recipes(category)
@@ -110,8 +114,12 @@ class CLI
     category.foods.each_with_index{|food, idx|
       puts "#{idx +1}. " + food.name.colorize(:blue)}
     input = recipe_list_choosing(category, category.foods.count)
-    display_recipe(category.foods[input.to_i-1])
-    display_after_recipe
+    if input.to_i != 0
+      display_recipe(category.foods[input.to_i-1])
+      display_after_recipe
+    else
+      display_after_recipe
+    end
   end
 
   def recipe_list_choosing(category,num_of_choices)
@@ -138,20 +146,20 @@ class CLI
       display_recipe(category.foods[random_choice])
       display_after_recipe
     else
-      puts "If you would like a new random recipe, enter 1.".colorize(:blue)
-      puts "If you would like to go back one level, enter 2.".colorize(:blue)
-      puts "If you would like to return to the start, enter 3.".colorize(:blue)
-      input = gets.strip
-      until ["1","2","3"].include?(input)
-        puts "Please enter 1, 2, or 3."
-        input = gets.strip
+      puts "If you would like a new random recipe, enter 'new'.".colorize(:blue)
+      puts "If you would like to go back one level, enter 'back'.".colorize(:blue)
+      puts "If you would like to return to the start, enter 'home'.".colorize(:blue)
+      input = gets.strip.downcase
+      until ["n","new","b","back","h","home"].include?(input)
+        puts "Please enter NEW, BACK, or HOME."
+        input = gets.strip.downcase
       end
       case input
-      when "1"
+      when "new" || 'n'
         random_recipe(category)
-      when "2"
+      when "back" || 'b'
         category_prompts(category)
-      when "3"
+      when "home" || 'h'
         home_screen
       end
     end
