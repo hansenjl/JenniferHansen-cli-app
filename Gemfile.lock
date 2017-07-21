@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    recipe_finder (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,6 +17,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    rake (10.4.2)
     rspec (3.6.0)
       rspec-core (~> 3.6.0)
       rspec-expectations (~> 3.6.0)
@@ -31,10 +37,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bundler (~> 1.15)
   colorize
   nokogiri
   pry
-  rspec
+  rake (~> 10.0)
+  recipe_finder!
+  rspec (~> 3.0)
 
 BUNDLED WITH
-   1.15.1
+   1.15.3
