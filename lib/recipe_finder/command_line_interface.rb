@@ -59,8 +59,8 @@ class RecipeFinder::CLI
   def choose_category
     puts "Please enter a number choice."
     @choice = gets.strip
-    until @choice.to_i > 0 && @choice.to_i <= Category.size
-      puts "Please enter a number choice from 1 to #{Category.size}."
+    until @choice.to_i > 0 && @choice.to_i <= RecipeFinder::Category.size
+      puts "Please enter a number choice from 1 to #{RecipeFinder::Category.size}."
       @choice = gets.strip
     end
     @choice
