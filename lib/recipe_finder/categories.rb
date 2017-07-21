@@ -11,7 +11,7 @@ class RecipeFinder::Category
   end
 
   def add_food(food_hash)
-    food = Food.new(food_hash)
+    food = RecipeFinder::Food.new(food_hash)
     food.category = self
     @foods << food
   end
