@@ -12,4 +12,8 @@ class Recipe
     @@all
   end
 
+  def find_by_ingredient(ingredient)
+    @@all.detect{|recipe|recipe.ingredients.include?(ingredient)}
+  end
+
 end
