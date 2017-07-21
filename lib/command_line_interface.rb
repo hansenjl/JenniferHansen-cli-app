@@ -23,6 +23,7 @@ class CLI
 
   def category_prompts(current_category)
     puts "What would you like to do?"
+    puts ""
     puts "1. List all recipes".colorize(:blue)
     puts "2. Surprise me with a recipe".colorize(:blue)
     puts "3. Sort recipes by total cook time".colorize(:blue)
@@ -193,16 +194,22 @@ class CLI
   end
 
   def display_recipe(food)
+    puts ""
     puts food.name.upcase.colorize(:magenta)
+    puts ""
     puts "TIME TO MAKE:" + "#{food.recipe.time}".colorize(:magenta)
+    puts ""
     puts "YIELD:" + "#{food.recipe.serving}".colorize(:magenta)
+    puts ""
     puts "INGREDIENTS:"
     food.recipe.ingredients.each_with_index{|i,idx|
       puts "#{idx+1}. "+"#{i}".colorize(:magenta)}
+    puts ""
     puts "STEPS:"
     puts food.recipe.steps[0].colorize(:magenta) if food.recipe.steps.count == 1
     food.recipe.steps.each_with_index{|s,idx|
       puts "#{idx+1}."+" #{s}".colorize(:magenta)}
+    puts ""
     puts "LINK:"
     puts "#{food.recipe_link}".colorize(:magenta)
   end
