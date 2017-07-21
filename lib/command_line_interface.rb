@@ -1,4 +1,5 @@
 require_relative '../config/environment.rb'
+require 'colorize'
 class CLI
   attr_accessor :choice
 
