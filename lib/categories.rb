@@ -20,4 +20,8 @@ class Category
     @@all
   end
 
+  def self.size
+    @@all.count
+  end
+
 end

@@ -58,15 +58,11 @@ class CLI
   def choose_category
     puts "Please enter a number choice."
     @choice = gets.strip
-    until @choice.to_i > 0 && @choice.to_i <= num_of_categories
-      puts "Please enter a number choice from 1 to #{num_of_categories}."
+    until @choice.to_i > 0 && @choice.to_i <= Category.size
+      puts "Please enter a number choice from 1 to #{Category.size}."
       @choice = gets.strip
     end
     @choice
-  end
-
-  def num_of_categories
-    Category.all.count
   end
 
   def create_categories
