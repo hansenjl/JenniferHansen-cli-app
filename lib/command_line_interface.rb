@@ -92,6 +92,21 @@ class CLI
   end
 
   def list_all_recipes(category)
+    puts "All of the #{category.name} recipes:"
+    category.foods.each_with_index{|food, idx|
+      puts "#{idx +1}. " + food.name.colorize(:blue)}
+    puts "Which recipe would you like to view? Enter the number that corresponds to the recipe or type 'back' to go back."
+    input = gets.strip
+      if ["back","go back","bac"].include?(input.downcase)
+        category_prompts(category)
+      else
+        until input.to_i > 0 && input.to_i < category.foods.count
+          puts "Please enter the number that matches the recipe you would like to view."
+          input = gets.strip
+        end
+        display_recipe(category.foods[input.to_i-1])
+        display_after_recipe
+      end
   end
 
 
@@ -102,6 +117,7 @@ class CLI
     answer = yes_or_no
     if answer == "Y"
       display_recipe(category.foods[random_choice])
+      display_after_recipe
     else
       puts "If you would like a new random recipe, enter 1.".colorize(:blue)
       puts "If you would like to go back one level, enter 2.".colorize(:blue)
