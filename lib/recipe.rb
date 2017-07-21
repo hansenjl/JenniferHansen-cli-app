@@ -13,7 +13,18 @@ class Recipe
   end
 
   def find_by_ingredient(ingredient)
-    @@all.detect{|recipe|recipe.ingredients.include?(ingredient)}
+    matching_recipes = @@all.collect{|recipe|
+      new_list = recipe.ingredients.collect{|i|i.downcase.include?(ingredient)}
+      new_list.any?{|a|a==true}
+    }
+    matching_recipes  #an array of true or false results - true corresponds to it does contain that ingredient
+    recipe_names = []
+    matching_recipes.each_with_index{|r,idx|
+      recipe_names<<@@all[idx].food.name if r == true
+      }
+    recipe_names
+    binding.pry
   end
 
 end
+

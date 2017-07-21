@@ -177,6 +177,21 @@ class CLI
 
 
   def search_by_ingredient(category)
+    puts "What ingredient are you searching for?"
+    input = gets.strip.downcase
+
+    results = category.foods.collect {|food| food.recipe.find_by_ingredient(input)}
+    if results.count == 0
+      puts "I'm sorry, there wasn't a recipe that matched the ingredient."
+      puts " Please try again."
+      search_by_ingredient(category)
+    else
+      puts "These are the recipes that we found:"
+      results.each_with_index{|recipe,idx|
+        puts "#{idx+1}. "+"#{recipe.food.name}"}
+      choice = recipe_list_choosing(category)
+      display_recipe(category.foods[choice.to_i])
+    end
   end
 
   def display_recipe(food)
