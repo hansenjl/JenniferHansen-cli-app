@@ -1,5 +1,6 @@
 require 'bundler' #Load bundler
 Bundler.require # Require the Gems from Gemfile using bundler
+require 'open-uri'
 
 #Load Libraries
 require_relative '../lib/food_item.rb'

@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'nokogiri'
-
 class Scraper
 
   def self.scrape_categories(categories_url)
