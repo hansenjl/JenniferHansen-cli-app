@@ -155,11 +155,11 @@ class CLI
         input = gets.strip.downcase
       end
       case input
-      when "new" || 'n'
+      when "new","n"
         random_recipe(category)
-      when "back" || 'b'
+      when "back", "b"
         category_prompts(category)
-      when "home" || 'h'
+      when "home", "h"
         home_screen
       end
     end
