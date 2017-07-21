@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/environment.rb'
+require_relative '../lib/recipe_finder.rb'
 
 CLI.new.call
