@@ -18,11 +18,11 @@ class Recipe
       new_list.any?{|a|a==true}
     }
    # matches is an array of true or false results - true corresponds to it does contain that ingredient
-    recipe_names = []
+    recipe_matches = []
     matches.each_with_index{|r,idx|
-      recipe_names<<@@all[idx].food.name if r == true
+      recipe_matches<<@@all[idx] if r == true
       }
-    recipe_names
+    recipe_matches
   end
 
 end

@@ -125,7 +125,7 @@ class CLI
           input = gets.strip
         end
       end
-      input
+    input
   end
 
 
@@ -179,9 +179,8 @@ class CLI
   def search_by_ingredient(category)
     puts "What ingredient are you searching for?"
     input = gets.strip.downcase
-
+    matching_recipes = []
     matching_recipes = category.foods[0].recipe.find_by_ingredient(input)
-    binding.pry
     if matching_recipes.count == 0
       puts "I'm sorry, there wasn't a recipe that matched the ingredient."
       puts " Please try again."
@@ -189,9 +188,14 @@ class CLI
     else
       puts "These are the recipes that we found:"
       matching_recipes.each_with_index{|recipe,idx|
-        puts "#{idx+1}. "+"#{recipe}".colorize(:blue)}
-      choice = recipe_list_choosing(category)
-      display_recipe(category.foods[choice.to_i])
+        puts "#{idx+1}. "+"#{recipe.food.name}".colorize(:blue)}
+      choice = recipe_list_choosing(category,matching_recipes.count)
+      binding.pry
+      if choice.to_i != 0
+        display_recipe(matching_recipes[choice.to_i-1].food)
+      else
+        display_after_recipe
+      end
     end
   end
 
