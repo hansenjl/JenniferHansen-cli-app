@@ -100,7 +100,7 @@ class CLI
     puts "All #{category.name} recipes listed in order from least number of ingredients to most number of ingredients:"
     sorted_foods.each_with_index{|f,idx|
       puts "#{idx+1}. "+"#{f.name}".colorize(:blue)}
-    input = recipe_list_choosing(category)
+    input = recipe_list_choosing(category, category.foods.count)
     display_recipe(sorted_foods[input.to_i-1])
     display_after_recipe
   end
@@ -109,18 +109,18 @@ class CLI
     puts "All of the #{category.name} recipes:"
     category.foods.each_with_index{|food, idx|
       puts "#{idx +1}. " + food.name.colorize(:blue)}
-    input = recipe_list_choosing(category)
+    input = recipe_list_choosing(category, category.foods.count)
     display_recipe(category.foods[input.to_i-1])
     display_after_recipe
   end
 
-  def recipe_list_choosing(category)
+  def recipe_list_choosing(category,num_of_choices)
     puts "Which recipe would you like to view? Enter the number that corresponds to the recipe or type 'back' to go back."
     input = gets.strip
       if ["back","go back","bac"].include?(input.downcase)
         category_prompts(category)
       else
-        until input.to_i > 0 && input.to_i <= category.foods.count
+        until input.to_i > 0 && input.to_i <= num_of_choices
           puts "Please enter the number that matches the recipe you would like to view."
           input = gets.strip
         end
@@ -180,15 +180,16 @@ class CLI
     puts "What ingredient are you searching for?"
     input = gets.strip.downcase
 
-    results = category.foods.collect {|food| food.recipe.find_by_ingredient(input)}
-    if results.count == 0
+    matching_recipes = category.foods[0].recipe.find_by_ingredient(input)
+    binding.pry
+    if matching_recipes.count == 0
       puts "I'm sorry, there wasn't a recipe that matched the ingredient."
       puts " Please try again."
       search_by_ingredient(category)
     else
       puts "These are the recipes that we found:"
-      results.each_with_index{|recipe,idx|
-        puts "#{idx+1}. "+"#{recipe.food.name}"}
+      matching_recipes.each_with_index{|recipe,idx|
+        puts "#{idx+1}. "+"#{recipe}".colorize(:blue)}
       choice = recipe_list_choosing(category)
       display_recipe(category.foods[choice.to_i])
     end
