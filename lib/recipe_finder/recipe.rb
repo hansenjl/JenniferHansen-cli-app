@@ -23,6 +23,10 @@ class RecipeFinder::Recipe
       recipe_matches<<@@all[idx] if r == true
       }
     recipe_matches
+    
+#     @@all.collect do |recipe|
+#       recipe if recipe.ingredients.any?{|i|i.downcase.include?(ingredient)}
+#     end.flatten
   end
 
 end
