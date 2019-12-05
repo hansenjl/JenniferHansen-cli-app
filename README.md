@@ -4,7 +4,7 @@
 
 You can install this gem via `gem install recipe-finder`. The recipe-finder CLI will be installed and you can run recipe-finder to get a list of food categories and recipes right in your command line.
 
-##Usage
+## Usage
 
 Run `recipe-finder` after installing the gem.
 
